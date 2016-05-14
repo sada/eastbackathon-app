@@ -1,7 +1,7 @@
 enchant();
 
 window.onload = function() {
-  var game_ = new Game(320, 320);
+  var game_ = new Game(320, 480);
   game_.fps = 24;
   [
     Config['startImagePath'],

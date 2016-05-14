@@ -3,7 +3,7 @@ enchant();
 window.onload = function() {
   var game_ = new Game(320, 320);
   game_.fps = 24;
-  game_.preload('./javascripts/enchant_js-0.8.3/images/start.png', './javascripts/enchant_js-0.8.3/images/gameover.png', './javascripts/enchant_js-0.8.3/images/chara1.png', './images/bg1.png', './images/bg2.png', './images/Q1.png', './javascripts/enchant_js-0.8.3/images/chara6.png');
+  game_.preload('./javascripts/enchant_js-0.8.3/images/start.png', './javascripts/enchant_js-0.8.3/images/gameover.png', './javascripts/enchant_js-0.8.3/images/chara1.png', './images/bg1.png', './images/bg2.png', './images/Q1.png');
 
   game_.onload = function() {
     var createStartScene = function() {

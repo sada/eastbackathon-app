@@ -3,7 +3,7 @@ enchant();
 window.onload = function() {
   var game_ = new Game(320, 320);
   game_.fps = 24;
-  game_.preload('./javascripts/enchant_js-0.8.3/images/start.png', './javascripts/enchant_js-0.8.3/images/gameover.png', './javascripts/enchant_js-0.8.3/images/chara1.png', './images/bg1.png', './images/bg2.png', './javascripts/enchant_js-0.8.3/images/chara6.png');
+  game_.preload('./javascripts/enchant_js-0.8.3/images/start.png', './javascripts/enchant_js-0.8.3/images/gameover.png', './javascripts/enchant_js-0.8.3/images/chara1.png', './images/bg1.png', './images/bg2.png', './images/Q1.png', './javascripts/enchant_js-0.8.3/images/chara6.png');
 
   game_.onload = function() {
     var createStartScene = function() {
@@ -16,7 +16,7 @@ window.onload = function() {
       startImage.y = 50;
       scene.addChild(startImage);
       
-      // 説明ラベル設定
+      // ステージ選択ラベル設定
       var selectStage1 = new Label('ステージA'); // ラベルを作る
       selectStage1.width = 320;
       selectStage1.textAlign = 'center';                 // 文字を中央寄せ
@@ -37,6 +37,7 @@ window.onload = function() {
     var createGameScene = function() {
         var scroll = 0;
 
+        var GROUND_LINE = 250;
         var SCROLL_SPEED = 5;
 
         var scene = new Scene();
@@ -54,7 +55,19 @@ window.onload = function() {
         bg2.y = 0;
         scene.addChild(bg2);
 
-        var charactor = new Charactor(game_.assets['./javascripts/enchant_js-0.8.3/images/chara1.png']);
+        //問題イメージオブジェクト設定
+       var question = new Sprite(92, 92);
+       question.image = game_.assets['./images/Q1.png'];
+       question.x = -question.width;
+       question.y = 120;
+       scene.addChild(question);
+
+        var charactorPosition = 0;
+
+        var charactor = new Sprite(32, 32);
+        charactor.image = game_.assets['./javascripts/enchant_js-0.8.3/images/chara1.png'];
+        charactor.x = 80;
+        charactor.y = GROUND_LINE - charactor.height;
         scene.addChild(charactor);
 
         var charactorHit = new Sprite(1, 1);
@@ -77,6 +90,11 @@ window.onload = function() {
           scene.addChild(answer);
         }
 
+        var charactorDead = function() {
+          charactor.frame = 3;
+          game_.pushScene(createGameoverScene(scroll));
+        }
+
         scene.addEventListener(Event.ENTER_FRAME, function(){
             scroll += SCROLL_SPEED;
 
@@ -89,14 +107,25 @@ window.onload = function() {
             for(var i = 0; i < 3; i++) {
               if (answers[i].x > -answers[i].width) {
                 answers[i].x -= SCROLL_SPEED;
+                console.log(answers[i].intersect(charactorHit));
                 if (answers[i].intersect(charactorHit)) {
-                  charactor.dead;
-                  game_.pushScene(createGameoverScene(scroll));
+                  charactorDead();
                 }
               }
             }
+            
+            if (scroll % 400 === 0) {
+              question.x = 320;
+            }
+            if (question.x > -question.width) {
+              question.x -= SCROLL_SPEED;
+            }
+            
 
-            charactor.updateFrame();
+            charactor.frame ++;
+            if (charactor.frame > 2) {
+              charactor.frame = 0;
+            }
 
             charactorHit.x = charactor.x + charactor.width/2;
             charactorHit.y = charactor.y + charactor.height/2;
@@ -113,17 +142,17 @@ window.onload = function() {
         });
 
         scene.addEventListener(Event.TOUCH_START, function(e){
-          if (charactor.position == 0) {
+          if (charactorPosition == 0) {
             charactor.tl.moveTo(80, 50, 12);
           }
-          else if (charactor.position == 1) {
+          else if (charactorPosition == 1) {
             charactor.tl.moveTo(80, 150, 12);
           }
-          else if (charactor.position == 2) {
+          else if (charactorPosition == 2) {
             charactor.tl.moveTo(80, 250, 12);
           }
-          charactor.position += 1;
-          charactor.position = charactor.position % 3;
+          charactorPosition += 1;
+          charactorPosition = charactorPosition % 3;
         });
 
         return scene;

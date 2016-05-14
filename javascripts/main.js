@@ -110,13 +110,16 @@ window.onload = function() {
             scroll += SCROLL_SPEED;
 
             if (scroll % 640 === 0) {
+            question.x = 320;
               for(var i = 0; i < 3; i++) {
-                answers[i].x = 320;
+                answers[i].x = 560;
               }
             }
 
-            for(var i = 0; i < 3; i++) {
-              if (answers[i].x > -answers[i].width) {
+            
+            if (question.x > -(question.width+240)) {
+              question.x -= SCROLL_SPEED;
+              for(var i = 0; i < 3; i++) {
                 answers[i].x -= SCROLL_SPEED;
                 if (answers[i].intersect(charactorHit)) {
                   if (answers[i].correct) {
@@ -129,13 +132,7 @@ window.onload = function() {
                 }
               }
             }
-            
-            if (scroll % 400 === 0) {
-              question.x = 320;
-            }
-            if (question.x > -question.width) {
-              question.x -= SCROLL_SPEED;
-            }
+
             
 
             charactor.updateFrame();

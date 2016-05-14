@@ -21,7 +21,7 @@ window.onload = function() {
       scene.backgroundColor = '#fcc800';
 
       var startImage = new Sprite(236, 48);
-      startImage.image = game_.assets['./javascripts/enchant_js-0.8.3/images/start.png'];
+      startImage.image = game_.assets[Config['startImagePath']];
       startImage.x = 42;
       startImage.y = 50;
       scene.addChild(startImage);
@@ -53,13 +53,13 @@ window.onload = function() {
         scene.backgroundColor = '#8cc820';
 
         var bg1 = new Sprite(320, 320);
-        bg1.image = game_.assets['./images/bg1.png'];
+        bg1.image = game_.assets[Config['backgroundImagePath1']];
         bg1.x = 0;
         bg1.y = 0;
         scene.addChild(bg1);
 
         var bg2 = new Sprite(320, 320);
-        bg2.image = game_.assets['./images/bg2.png'];
+        bg2.image = game_.assets[Config['backgroundImagePath2']];
         bg2.x = 320;
         bg2.y = 0;
         scene.addChild(bg2);
@@ -71,7 +71,7 @@ window.onload = function() {
        question.y = 120;
        scene.addChild(question);
 
-        var charactor = new Charactor(game_.assets['./javascripts/enchant_js-0.8.3/images/chara1.png']);
+        var charactor = new Charactor(game_.assets[Config['charactorImagePath']]);
         scene.addChild(charactor);
 
         var charactorHit = new Sprite(1, 1);

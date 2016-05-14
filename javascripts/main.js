@@ -1,6 +1,9 @@
 enchant();
 
 window.onload = function() {
+  var result = {
+    'correctAnswer': 0
+  };
   var game_ = new Game(320, 480);
   game_.fps = 24;
   var imagePaths = [
@@ -28,6 +31,9 @@ window.onload = function() {
       startImage.x = 42;
       startImage.y = 50;
       scene.addChild(startImage);
+
+      var description = createLabel('下（した）のステージの名前（なまえ）をタッチするとゲームが始（はじ）まるよ', 180);
+      scene.addChild(description);
       
       // ステージ選択ラベル設定
       var selectStage1 = new Label('ステージA'); // ラベルを作る
@@ -45,6 +51,22 @@ window.onload = function() {
       });
 
       return scene;
+    };
+
+    var createLabel = function(text, y) {
+      var label = new Label(text);
+      label.width = 320;
+      label.textAlign = 'center';
+      label.color = '#ffffff';
+      label.x = 0;
+      label.y = y || 284;
+      label.font = '14px sans-serif';
+      return label;
+    };
+
+    var createScoreLabel = function(scene) {
+      var label = createLabel('正解数（せいかいすう）: ' + result['correctAnswer'], 250);
+      scene.addChild(label);
     };
 
     var createGameScene = function() {
@@ -98,6 +120,7 @@ window.onload = function() {
           answer.font = '14px sans-serif';
           if (selectedQuestionData['ans_number'] - 1 == i) {
             answer.correct = true;
+            result['correctAnswer'] += 1
           }
           else {
             answer.correct = false;
@@ -178,6 +201,8 @@ window.onload = function() {
       correctAnswerImage.y = 50;
       scene.addChild(correctAnswerImage);
 
+      createScoreLabel(scene);
+
       var retryLabel = new Label('リトライ');
       retryLabel.width = 320;
       retryLabel.textAlign = 'center';
@@ -209,6 +234,8 @@ window.onload = function() {
       gameoverImage.x = 66;
       gameoverImage.y = 170;
       scene.addChild(gameoverImage);
+
+      createScoreLabel(scene);
 
       var retryLabel = new Label('リトライ');
       retryLabel.width = 320;

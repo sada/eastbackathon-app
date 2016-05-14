@@ -32,7 +32,7 @@ window.onload = function() {
       startImage.y = 50;
       scene.addChild(startImage);
 
-      var description = createLabel('下（した）のステージの名前（なまえ）ををタッチするとゲームが始（はじ）まるよ', 180);
+      var description = createLabel('下（した）のステージの名前（なまえ）をタッチするとゲームが始（はじ）まるよ', 180);
       scene.addChild(description);
       
       // ステージ選択ラベル設定

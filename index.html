@@ -10,13 +10,13 @@
     game.onload = function(){
         var bear = new Sprite(32, 32);
         bear.image = game.assets['javascripts/enchant_js-0.8.3/examples/beginner/hellobear/chara1.png'];
+        bear.x =50;
+        bear.y =280;
+        
         game.rootScene.addChild(bear);
         bear.frame = [6, 6, 7, 7];   // select sprite frame
         
-        bear.tl.moveBy(288, 0, 90)   // move right
-            .scaleTo(-1, 1, 10)      // turn left
-            .moveBy(-288, 0, 90)     // move left
-            .scaleTo(1, 1, 10)       // turn right
+        bear.tl.moveBy(0, 0, 90)   // move right
             .loop();                 // loop it
     };
 

@@ -28,6 +28,15 @@ window.onload = function() {
       startImage.x = 42;
       startImage.y = 50;
       scene.addChild(startImage);
+
+      var description = new Label('がめんをタッチするとゲームがはじまるよ');
+      description.width = 320;
+      description.textAlign = 'center';
+      description.color = '#fff';
+      description.x = 0;
+      description.y = 200;
+      description.font = '14px sans-serif';
+      scene.addChild(description);
       
       // ステージ選択ラベル設定
       var selectStage1 = new Label('ステージA'); // ラベルを作る

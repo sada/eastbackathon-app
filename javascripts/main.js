@@ -82,12 +82,6 @@ window.onload = function() {
           scene.addChild(answer);
         }
 
-        var enemy = new Sprite(32, 32);
-        enemy.image = game_.assets['./javascripts/enchant_js-0.8.3/images/chara6.png'];
-        enemy.x = -enemy.width;
-        enemy.y = GROUND_LINE - enemy.height;
-        scene.addChild(enemy);
-
         var charactorDead = function() {
           charactor.frame = 3;
           game_.pushScene(createGameoverScene(scroll));
@@ -97,7 +91,6 @@ window.onload = function() {
             scroll += SCROLL_SPEED;
 
             if (scroll % 640 === 0) {
-              enemy.x = 320;
               for(var i = 0; i < 3; i++) {
                 answers[i].x = 320;
               }
@@ -110,13 +103,6 @@ window.onload = function() {
                 if (answers[i].intersect(charactorHit)) {
                   charactorDead();
                 }
-              }
-            }
-
-            if (enemy.x > -enemy.width) {
-              enemy.x -= SCROLL_SPEED;
-              if (enemy.intersect(charactorHit)) {
-                charactorDead();
               }
             }
 

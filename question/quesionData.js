@@ -6,5 +6,29 @@ var questionData = [
      "answer2":"きのこ",
      "answer3":"えんぴつ",
      "ans_number":1
+   },
+   {
+     "ID":2,
+     "question":"Q2.png",
+     "answer1":"えい",
+     "answer2":"さめ",
+     "answer3":"たつのおとしご",
+     "ans_number":1
+   },
+   {
+     "ID":3,
+     "question":"Q3.png",
+     "answer1":"ざくろ",
+     "answer2":"どりあん",
+     "answer3":"ばなな",
+     "ans_number":3
+   },
+   {
+     "ID":4,
+     "question":"Q4.png",
+     "answer1":"さざんか",
+     "answer2":"ひまわり",
+     "answer3":"ハイビスカス",
+     "ans_number":2
    }
 ]

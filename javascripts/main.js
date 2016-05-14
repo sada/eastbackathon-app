@@ -38,7 +38,7 @@ window.onload = function() {
         var scroll = 0;
 
         var GROUND_LINE = 250;
-        var SCROLL_SPEED = 10;
+        var SCROLL_SPEED = 5;
 
         var scene = new Scene();
         scene.backgroundColor = '#8cc820';

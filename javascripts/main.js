@@ -3,7 +3,17 @@ enchant();
 window.onload = function() {
   var game_ = new Game(320, 320);
   game_.fps = 24;
-  game_.preload('./javascripts/enchant_js-0.8.3/images/start.png', './javascripts/enchant_js-0.8.3/images/gameover.png', './javascripts/enchant_js-0.8.3/images/chara1.png', './images/bg1.png', './images/bg2.png', './images/Q1.png', './javascripts/enchant_js-0.8.3/images/chara6.png');
+  [
+    Config['startImagePath'],
+    Config['correctAnswerImagePath'],
+    Config['gameOverImagePath'],
+    Config['charactorImagePath'],
+    Config['backgroundImagePath1'],
+    Config['backgroundImagePath2'],
+    './images/Q1.png'
+  ].forEach(function(imagePath) {
+   game_.preload(imagePath);
+  });
 
   game_.onload = function() {
     var createStartScene = function() {
@@ -80,6 +90,13 @@ window.onload = function() {
           answer.x = -answer.width;
           answer.y = 50 + (i * 100);
           answer.font = '14px sans-serif';
+          console.log(questionData[0]);
+          if (questionData[0]['ans_number'] - 1 == i) {
+            answer.correct = true;
+          }
+          else {
+            answer.correct = false;
+          }
           answers.push(answer);
           scene.addChild(answer);
         }
@@ -97,8 +114,13 @@ window.onload = function() {
               if (answers[i].x > -answers[i].width) {
                 answers[i].x -= SCROLL_SPEED;
                 if (answers[i].intersect(charactorHit)) {
-                  charactor.frame = 3;
-                  game_.pushScene(createGameoverScene(scroll));
+                  if (answers[i].correct) {
+                    game_.pushScene(createCorrectAnswerScene(scroll));
+                  }
+                  else {
+                    charactor.frame = 3;
+                    game_.pushScene(createGameoverScene(scroll));
+                  }
                 }
               }
             }
@@ -148,10 +170,10 @@ window.onload = function() {
       var scene = new Scene();
       scene.backgroundColor = 'rgba(0, 0, 0, 0.5)';
 
-      var correctAnswerImage = new Sprite(189, 97);
-      correctAnswerImage.image = game_.assets['./javascripts/enchant_js-0.8.3/images/clear.png'];
-      correctAnswerImage.x = 66;
-      correctAnswerImage.y = 170;
+      var correctAnswerImage = new Sprite(236, 48);
+      correctAnswerImage.image = game_.assets[Config['correctAnswerImagePath']];
+      correctAnswerImage.x = 42;
+      correctAnswerImage.y = 50;
       scene.addChild(correctAnswerImage);
 
       var retryLabel = new Label('リトライ');

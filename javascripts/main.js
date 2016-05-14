@@ -3,15 +3,18 @@ enchant();
 window.onload = function() {
   var game_ = new Game(320, 480);
   game_.fps = 24;
-  [
+  var imagePaths = [
     Config['startImagePath'],
     Config['correctAnswerImagePath'],
     Config['gameOverImagePath'],
     Config['charactorImagePath'],
     Config['backgroundImagePath1'],
-    Config['backgroundImagePath2'],
-    './images/Q1.png'
-  ].forEach(function(imagePath) {
+    Config['backgroundImagePath2']
+  ];
+  questionData.forEach(function(data) {
+    imagePaths.push('./images/' + data['question']);
+  });
+  imagePaths.forEach(function(imagePath) {
    game_.preload(imagePath);
   });
 
@@ -64,9 +67,12 @@ window.onload = function() {
         bg2.y = 0;
         scene.addChild(bg2);
 
+        var questionDataIndex = Math.floor(Math.random() * 10 % questionData.length);
+        var selectedQuestionData = questionData[questionDataIndex];
+
         //問題イメージオブジェクト設定
        var question = new Sprite(92, 92);
-       question.image = game_.assets['./images/' + questionData[0]["question"]];
+       question.image = game_.assets['./images/' + selectedQuestionData["question"]];
        question.x = -question.width;
        question.y = 120;
        scene.addChild(question);
@@ -81,7 +87,7 @@ window.onload = function() {
 
         var answers = [];
         for(var i = 0; i < 3; i++) {
-        var answer = new Label(questionData[0]["answer" + (i + 1)]);
+        var answer = new Label(selectedQuestionData["answer" + (i + 1)]);
           answer.width = 100;
           answer.height = 32;
           answer.backgroundColor = '#000';
@@ -90,7 +96,7 @@ window.onload = function() {
           answer.x = -answer.width;
           answer.y = 50 + (i * 100);
           answer.font = '14px sans-serif';
-          if (questionData[0]['ans_number'] - 1 == i) {
+          if (selectedQuestionData['ans_number'] - 1 == i) {
             answer.correct = true;
           }
           else {

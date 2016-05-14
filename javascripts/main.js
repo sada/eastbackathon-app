@@ -67,6 +67,21 @@ window.onload = function() {
         charactorHit.y = charactor.y + charactor.height / 2;
         scene.addChild(charactorHit);
 
+        var answers = [];
+        for(var i = 0; i < 3; i++) {
+          var answer = new Label('Answer' + (i + 1));
+          answer.width = 100;
+          answer.height = 32;
+          answer.backgroundColor = '#000';
+          answer.textAlign = 'center';
+          answer.color = '#ffffff';
+          answer.x = -answer.width;
+          answer.y = 50 + (i * 100);
+          answer.font = '14px sans-serif';
+          answers.push(answer);
+          scene.addChild(answer);
+        }
+
         var enemy = new Sprite(32, 32);
         enemy.image = game_.assets['./javascripts/enchant_js-0.8.3/images/chara6.png'];
         enemy.x = -enemy.width;
@@ -83,6 +98,19 @@ window.onload = function() {
 
             if (scroll % 640 === 0) {
               enemy.x = 320;
+              for(var i = 0; i < 3; i++) {
+                answers[i].x = 320;
+              }
+            }
+
+            for(var i = 0; i < 3; i++) {
+              if (answers[i].x > -answers[i].width) {
+                answers[i].x -= SCROLL_SPEED;
+                console.log(answers[i].intersect(charactorHit));
+                if (answers[i].intersect(charactorHit)) {
+                  charactorDead();
+                }
+              }
             }
 
             if (enemy.x > -enemy.width) {

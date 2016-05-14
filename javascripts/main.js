@@ -90,7 +90,6 @@ window.onload = function() {
           answer.x = -answer.width;
           answer.y = 50 + (i * 100);
           answer.font = '14px sans-serif';
-          console.log(questionData[0]);
           if (questionData[0]['ans_number'] - 1 == i) {
             answer.correct = true;
           }

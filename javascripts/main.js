@@ -37,7 +37,6 @@ window.onload = function() {
     var createGameScene = function() {
         var scroll = 0;
 
-        var GROUND_LINE = 250;
         var SCROLL_SPEED = 5;
 
         var scene = new Scene();

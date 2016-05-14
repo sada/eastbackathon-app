@@ -55,7 +55,6 @@ window.onload = function() {
         bg2.y = 0;
         scene.addChild(bg2);
 
-        var charactorPosition = 0;
         var charactor = new Charactor(game_.assets['./javascripts/enchant_js-0.8.3/images/chara1.png']);
         scene.addChild(charactor);
 
@@ -115,17 +114,17 @@ window.onload = function() {
         });
 
         scene.addEventListener(Event.TOUCH_START, function(e){
-          if (charactorPosition == 0) {
+          if (charactor.position == 0) {
             charactor.tl.moveTo(80, 50, 12);
           }
-          else if (charactorPosition == 1) {
+          else if (charactor.position == 1) {
             charactor.tl.moveTo(80, 150, 12);
           }
-          else if (charactorPosition == 2) {
+          else if (charactor.position == 2) {
             charactor.tl.moveTo(80, 250, 12);
           }
-          charactorPosition += 1;
-          charactorPosition = charactorPosition % 3;
+          charactor.position += 1;
+          charactor.position = charactor.position % 3;
         });
 
         return scene;

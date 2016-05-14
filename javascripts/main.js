@@ -37,7 +37,6 @@ window.onload = function() {
     var createGameScene = function() {
         var scroll = 0;
 
-        var GROUND_LINE = 250;
         var SCROLL_SPEED = 5;
 
         var scene = new Scene();
@@ -62,12 +61,7 @@ window.onload = function() {
        question.y = 120;
        scene.addChild(question);
 
-        var charactorPosition = 0;
-
-        var charactor = new Sprite(32, 32);
-        charactor.image = game_.assets['./javascripts/enchant_js-0.8.3/images/chara1.png'];
-        charactor.x = 80;
-        charactor.y = GROUND_LINE - charactor.height;
+        var charactor = new Charactor(game_.assets['./javascripts/enchant_js-0.8.3/images/chara1.png']);
         scene.addChild(charactor);
 
         var charactorHit = new Sprite(1, 1);
@@ -90,11 +84,6 @@ window.onload = function() {
           scene.addChild(answer);
         }
 
-        var charactorDead = function() {
-          charactor.frame = 3;
-          game_.pushScene(createGameoverScene(scroll));
-        }
-
         scene.addEventListener(Event.ENTER_FRAME, function(){
             scroll += SCROLL_SPEED;
 
@@ -107,9 +96,9 @@ window.onload = function() {
             for(var i = 0; i < 3; i++) {
               if (answers[i].x > -answers[i].width) {
                 answers[i].x -= SCROLL_SPEED;
-                console.log(answers[i].intersect(charactorHit));
                 if (answers[i].intersect(charactorHit)) {
-                  charactorDead();
+                  charactor.frame = 3;
+                  game_.pushScene(createGameoverScene(scroll));
                 }
               }
             }
@@ -122,10 +111,7 @@ window.onload = function() {
             }
             
 
-            charactor.frame ++;
-            if (charactor.frame > 2) {
-              charactor.frame = 0;
-            }
+            charactor.updateFrame();
 
             charactorHit.x = charactor.x + charactor.width/2;
             charactorHit.y = charactor.y + charactor.height/2;
@@ -142,17 +128,17 @@ window.onload = function() {
         });
 
         scene.addEventListener(Event.TOUCH_START, function(e){
-          if (charactorPosition == 0) {
+          if (charactor.position == 0) {
             charactor.tl.moveTo(80, 50, 12);
           }
-          else if (charactorPosition == 1) {
+          else if (charactor.position == 1) {
             charactor.tl.moveTo(80, 150, 12);
           }
-          else if (charactorPosition == 2) {
+          else if (charactor.position == 2) {
             charactor.tl.moveTo(80, 250, 12);
           }
-          charactorPosition += 1;
-          charactorPosition = charactorPosition % 3;
+          charactor.position += 1;
+          charactor.position = charactor.position % 3;
         });
 
         return scene;

@@ -96,7 +96,6 @@ window.onload = function() {
             for(var i = 0; i < 3; i++) {
               if (answers[i].x > -answers[i].width) {
                 answers[i].x -= SCROLL_SPEED;
-                console.log(answers[i].intersect(charactorHit));
                 if (answers[i].intersect(charactorHit)) {
                   charactorDead();
                 }

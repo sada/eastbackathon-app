@@ -113,6 +113,38 @@ window.onload = function() {
         return scene;
     }
 
+    var createCorrectAnswerScene = function(scroll) {
+      var scene = new Scene();
+      scene.backgroundColor = 'rgba(0, 0, 0, 0.5)';
+
+      var correctAnswerImage = new Sprite(189, 97);
+      correctAnswerImage.image = game_.assets['./javascripts/enchant_js-0.8.3/images/clear.png'];
+      correctAnswerImage.x = 66;
+      correctAnswerImage.y = 170;
+      scene.addChild(correctAnswerImage);
+
+      var retryLabel = new Label('リトライ');
+      retryLabel.width = 320;
+      retryLabel.textAlign = 'center';
+      retryLabel.color = '#ffffff';
+      retryLabel.x = 0;
+      retryLabel.y = 284;
+      retryLabel.font = '24px sans-serif';
+      scene.addChild(retryLabel);
+
+      var buttonRetry = new Sprite(320, 32);
+      buttonRetry.x = 0;
+      buttonRetry.y = 284;
+      scene.addChild(buttonRetry);
+
+      buttonRetry.addEventListener(Event.TOUCH_END, function(){
+        game_.popScene();
+        game_.replaceScene(createStartScene());
+      });
+
+      return scene;
+    };
+
     var createGameoverScene = function(scroll) {
       var scene = new Scene();
       scene.backgroundColor = 'rgba(0, 0, 0, 0.5)';

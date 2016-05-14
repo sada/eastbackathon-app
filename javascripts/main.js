@@ -79,11 +79,6 @@ window.onload = function() {
           scene.addChild(answer);
         }
 
-        var charactorDead = function() {
-          charactor.dead;
-          game_.pushScene(createGameoverScene(scroll));
-        }
-
         scene.addEventListener(Event.ENTER_FRAME, function(){
             scroll += SCROLL_SPEED;
 
@@ -97,7 +92,8 @@ window.onload = function() {
               if (answers[i].x > -answers[i].width) {
                 answers[i].x -= SCROLL_SPEED;
                 if (answers[i].intersect(charactorHit)) {
-                  charactorDead();
+                  charactor.dead;
+                  game_.pushScene(createGameoverScene(scroll));
                 }
               }
             }

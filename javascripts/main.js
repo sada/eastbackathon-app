@@ -56,7 +56,7 @@ window.onload = function() {
 
         //問題イメージオブジェクト設定
        var question = new Sprite(92, 92);
-       question.image = game_.assets['./images/Q1.png'];
+       question.image = game_.assets['./images/' + questionData[0]["question"]];
        question.x = -question.width;
        question.y = 120;
        scene.addChild(question);

@@ -3,7 +3,16 @@ enchant();
 window.onload = function() {
   var game_ = new Game(320, 320);
   game_.fps = 24;
-  game_.preload('./javascripts/enchant_js-0.8.3/images/start.png', './javascripts/enchant_js-0.8.3/images/gameover.png', './javascripts/enchant_js-0.8.3/images/chara1.png', './images/bg1.png', './images/bg2.png', './images/Q1.png');
+  [
+    Config['startImagePath'],
+    Config['gameOverImagePath'],
+    Config['charactorImagePath'],
+    Config['backgroundImagePath1'],
+    Config['backgroundImagePath2'],
+    './images/Q1.png'
+  ].forEach(function(imagePath) {
+    game_.preload(imagePath);
+  });
 
   game_.onload = function() {
     var createStartScene = function() {
@@ -11,7 +20,7 @@ window.onload = function() {
       scene.backgroundColor = '#fcc800';
 
       var startImage = new Sprite(236, 48);
-      startImage.image = game_.assets['./javascripts/enchant_js-0.8.3/images/start.png'];
+      startImage.image = game_.assets[Config['startImagePath']];
       startImage.x = 42;
       startImage.y = 50;
       scene.addChild(startImage);
@@ -43,13 +52,13 @@ window.onload = function() {
         scene.backgroundColor = '#8cc820';
 
         var bg1 = new Sprite(320, 320);
-        bg1.image = game_.assets['./images/bg1.png'];
+        bg1.image = game_.assets[Config['backgroundImagePath1']];
         bg1.x = 0;
         bg1.y = 0;
         scene.addChild(bg1);
 
         var bg2 = new Sprite(320, 320);
-        bg2.image = game_.assets['./images/bg2.png'];
+        bg2.image = game_.assets[Config['backgroundImagePath2']];
         bg2.x = 320;
         bg2.y = 0;
         scene.addChild(bg2);
@@ -61,7 +70,7 @@ window.onload = function() {
        question.y = 120;
        scene.addChild(question);
 
-        var charactor = new Charactor(game_.assets['./javascripts/enchant_js-0.8.3/images/chara1.png']);
+        var charactor = new Charactor(game_.assets[Config['charactorImagePath']]);
         scene.addChild(charactor);
 
         var charactorHit = new Sprite(1, 1);
@@ -181,7 +190,7 @@ window.onload = function() {
       scene.backgroundColor = 'rgba(0, 0, 0, 0.5)';
 
       var gameoverImage = new Sprite(189, 97);
-      gameoverImage.image = game_.assets['./javascripts/enchant_js-0.8.3/images/gameover.png'];
+      gameoverImage.image = game_.assets[Config['gameOverImagePath']];
       gameoverImage.x = 66;
       gameoverImage.y = 170;
       scene.addChild(gameoverImage);

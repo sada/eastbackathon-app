@@ -56,10 +56,7 @@ window.onload = function() {
         scene.addChild(bg2);
 
         var charactorPosition = 0;
-        var charactor = new Sprite(32, 32);
-        charactor.image = game_.assets['./javascripts/enchant_js-0.8.3/images/chara1.png'];
-        charactor.x = 80;
-        charactor.y = GROUND_LINE - charactor.height;
+        var charactor = new Charactor(game_.assets['./javascripts/enchant_js-0.8.3/images/chara1.png']);
         scene.addChild(charactor);
 
         var charactorHit = new Sprite(1, 1);
@@ -83,7 +80,7 @@ window.onload = function() {
         }
 
         var charactorDead = function() {
-          charactor.frame = 3;
+          charactor.dead;
           game_.pushScene(createGameoverScene(scroll));
         }
 
@@ -106,10 +103,7 @@ window.onload = function() {
               }
             }
 
-            charactor.frame ++;
-            if (charactor.frame > 2) {
-              charactor.frame = 0;
-            }
+            charactor.updateFrame();
 
             charactorHit.x = charactor.x + charactor.width/2;
             charactorHit.y = charactor.y + charactor.height/2;

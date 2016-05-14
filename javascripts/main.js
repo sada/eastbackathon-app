@@ -13,10 +13,21 @@ window.onload = function() {
       var startImage = new Sprite(236, 48);
       startImage.image = game_.assets['./javascripts/enchant_js-0.8.3/images/start.png'];
       startImage.x = 42;
-      startImage.y = 157;
+      startImage.y = 50;
       scene.addChild(startImage);
+      
+      // 説明ラベル設定
+      var selectStage1 = new Label('ステージA'); // ラベルを作る
+      selectStage1.width = 320;
+      selectStage1.textAlign = 'center';                 // 文字を中央寄せ
+      selectStage1.color = '#ffffff';                    // 文字を白色に
+      selectStage1.x = 0;                                // 横位置調整
+      selectStage1.y = 222;                              // 縦位置調整
+      selectStage1.font = '14px sans-serif';             // 28pxのゴシック体にする
+      scene.addChild(selectStage1);                      // シーンに追加
 
-      startImage.addEventListener(Event.TOUCH_START, function(e) {
+
+      selectStage1.addEventListener(Event.TOUCH_START, function(e) {
           game_.replaceScene(createGameScene());
       });
 

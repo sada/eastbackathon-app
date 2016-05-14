@@ -120,7 +120,7 @@ window.onload = function() {
           answer.font = '14px sans-serif';
           if (selectedQuestionData['ans_number'] - 1 == i) {
             answer.correct = true;
-            result['correctAnswer'] += 1
+
           }
           else {
             answer.correct = false;
@@ -146,6 +146,7 @@ window.onload = function() {
                 answers[i].x -= SCROLL_SPEED;
                 if (answers[i].intersect(charactorHit)) {
                   if (answers[i].correct) {
+                    result['correctAnswer'] += 1
                     game_.pushScene(createCorrectAnswerScene(scroll));
                   }
                   else {

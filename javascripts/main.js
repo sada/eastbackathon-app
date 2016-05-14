@@ -71,7 +71,7 @@ window.onload = function() {
 
         var answers = [];
         for(var i = 0; i < 3; i++) {
-          var answer = new Label('Answer' + (i + 1));
+        var answer = new Label(questionData[0]["answer" + (i + 1)]);
           answer.width = 100;
           answer.height = 32;
           answer.backgroundColor = '#000';

@@ -3,7 +3,7 @@ var Charactor = enchant.Class.create(enchant.Sprite, {
     enchant.Sprite.call(this, 32, 32);
     this.image = image;
     this.x = 80;
-    this.y = 150;
+    this.y = 50;
     this.position = 1;
     this.type = type;
     if (type == 'bear') {

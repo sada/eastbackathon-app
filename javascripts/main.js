@@ -15,9 +15,11 @@ window.onload = function() {
     Config['startTitleImagePath'],
     Config['startBackgroundImagePath'],
     Config['correctAnswerImagePath'],
-    Config['gameOverImagePath'],
-    Config['charactorImagePath']
+    Config['gameOverImagePath']
   ];
+  Config['charactorImagePaths'].forEach(function(charactorImagePath) {
+    imagePaths.push(charactorImagePath);
+  });
   Config['enemyImagePaths'].forEach(function(enemyImagePath) {
     imagePaths.push(enemyImagePath);
   });
@@ -97,6 +99,10 @@ window.onload = function() {
       return enemy;
     };
 
+    var getCharactorImagePath = function() {
+      return Config['charactorImagePaths'][result['backgroundLevel'] % (Config['charactorImagePaths'].length)];
+    };
+
     var createGameScene = function() {
         var scroll = 0;
 
@@ -122,7 +128,7 @@ window.onload = function() {
        question.y = 120;
        scene.addChild(question);
 
-        var charactor = new Charactor(game_.assets[Config['charactorImagePath']]);
+        var charactor = new Charactor(game_.assets[getCharactorImagePath()]);
         scene.addChild(charactor);
 
         var charactorHit = new Sprite(1, 1);

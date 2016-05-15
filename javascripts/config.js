@@ -7,7 +7,11 @@ var Config = {
 
   'gameOverImagePath': './javascripts/enchant_js-0.8.3/images/gameover.png',
 
-  'charactorImagePath': './javascripts/enchant_js-0.8.3/images/chara1.png',
+  'charactorImagePaths': [
+    './javascripts/enchant_js-0.8.3/images/chara1.png',
+    './javascripts/enchant_js-0.8.3/images/chara2.png',
+    './javascripts/enchant_js-0.8.3/images/chara3.png'
+   ],
 
   'backgroundImagePaths': [
     './images/bg1.png',

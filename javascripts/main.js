@@ -73,6 +73,7 @@ window.onload = function() {
         var scroll = 0;
 
         var SCROLL_SPEED = 5;
+        var BETWEEN_Q_A = 100;
 
         var scene = new Scene();
         scene.backgroundColor = '#8cc820';
@@ -102,6 +103,12 @@ window.onload = function() {
         charactorHit.y = charactor.y + charactor.height / 2;
         scene.addChild(charactorHit);
 
+        var scoreLabel = new Label("");            // ラベルをつくる
+        scoreLabel.color = '#fff';                 // 白色に設定
+        scoreLabel.x = scene.wight / 2;
+        scene.addChild(scoreLabel);                // シーンに追加
+
+
         var answers = [];
         for(var i = 0; i < 3; i++) {
         var answer = new Label(selectedQuestionData["answer" + (i + 1)]);
@@ -115,7 +122,7 @@ window.onload = function() {
           answer.font = '14px sans-serif';
           if (selectedQuestionData['ans_number'] - 1 == i) {
             answer.correct = true;
-            result['correctAnswer'] += 1
+
           }
           else {
             answer.correct = false;
@@ -126,13 +133,14 @@ window.onload = function() {
 
         scene.addEventListener(Event.ENTER_FRAME, function(){
             scroll += SCROLL_SPEED;
+            scoreLabel.text = scroll.toString()+'㍍走破'; // スコア表示を更新
 
-            if (scroll == 320) {
-              question.x = 320;
+            if (scroll == 350) {
+              question.x = 350;
             }
             if (scroll == 840) {
               for(var i = 0; i < 3; i++) {
-                answers[i].x = 840;
+                answers[i].x = question.x + BETWEEN_Q_A;
               }
             }
 
@@ -141,6 +149,7 @@ window.onload = function() {
               answers[i].x -= SCROLL_SPEED;
               if (answers[i].intersect(charactorHit)) {
                 if (answers[i].correct) {
+                  result['correctAnswer'] += 1
                   game_.pushScene(createCorrectAnswerScene(scroll));
                 }
                 else {

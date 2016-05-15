@@ -136,9 +136,13 @@ window.onload = function() {
         scene.addChild(scoreLabel);                // シーンに追加
 
         // お邪魔キャラの設定
-        var enemyIndex = Math.floor(Math.random() * 10 % Config['enemyImagePaths'].length);
-        var enemy = createEnemy(game_.assets[Config['enemyImagePaths'][enemyIndex]]);
-        scene.addChild(enemy);
+        var enemies = [];
+        for(var i = 0; i < (result['backgroundLevel'] + 1 * 5); i++) {
+          var enemyIndex = Math.floor(Math.random() * 10 % Config['enemyImagePaths'].length);
+          var enemy = createEnemy(game_.assets[Config['enemyImagePaths'][enemyIndex]]);
+          scene.addChild(enemy);
+          enemies.push(enemy);
+        }
 
         //お邪魔キャラ当たり判定ウェイト用フラグ
         var wightFlg = new Boolean(false);
@@ -197,21 +201,25 @@ window.onload = function() {
             }
 
             //お邪魔キャラ出現
-            if( scroll % 400 === 0){
-            enemy.x = 320;
-            }
-            if (enemy.x > -enemy.width) {
-              enemy.x -= SCROLL_SPEED;
-              if (enemy.intersect(charactorHit)) { // お邪魔キャラと自機がぶつかったとき
-                  if(!wightFlg){
-                    result['hitCount'] += 1;
-                    wightFlg = true;
-                  }
-              }else{
-                wightFlg = false;
-              }
+            if (scroll == 50) {
+              enemies.forEach(function(enemy, index) {
+                enemy.x = game_.width + index * 200;
+              });
             }
 
+            enemies.forEach(function(enemy, index) {
+              if (enemy.x > -enemy.width) {
+                enemy.x -= SCROLL_SPEED;
+                if (enemy.intersect(charactorHit)) { // お邪魔キャラと自機がぶつかったとき
+                    if(!wightFlg){
+                      result['hitCount'] += 1;
+                      wightFlg = true;
+                    }
+                }else{
+                  wightFlg = false;
+                }
+              }
+            });
 
             charactor.updateFrame();
 

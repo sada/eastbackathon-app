@@ -3,6 +3,7 @@ enchant();
 window.onload = function() {
   var result = {
     'correctAnswer': 0,
+    'hitCount':0,
 
     'distance': 0,
 
@@ -15,6 +16,7 @@ window.onload = function() {
     Config['correctAnswerImagePath'],
     Config['gameOverImagePath'],
     Config['charactorImagePath']
+    Config['enemyImagePath']
   ];
   Config['backgroundImagePaths'].forEach(function(backgroundImagePath) {
     imagePaths.push(backgroundImagePath);
@@ -74,6 +76,8 @@ window.onload = function() {
       scene.addChild(label);
       label = createLabel('走った距離（はしったきょり）: ' + result['distance'] + '㍍', 220);
       scene.addChild(label);
+      label = createLabel('敵（てき）にぶつかった回数（かいすう）: ' + result['hitCount'] + '回', 240);
+      scene.addChild(label);
     };
 
     var getBackgroundImagePath = function() {
@@ -126,6 +130,16 @@ window.onload = function() {
         scoreLabel.x = scene.wight / 2;
         scene.addChild(scoreLabel);                // シーンに追加
 
+        //お邪魔キャラの設定
+        var enemy = new Sprite(32, 32);          // スプライトをつくる
+        enemy.image = game_.assets[Config['enemyImagePath']]; // 画像を設定
+        enemy.x = -enemy.width;
+        enemy.y = 50;
+        scene.addChild(enemy);                    // シーンに追加
+
+        //お邪魔キャラ当たり判定ウェイト用フラグ
+        var wightFlg = new Boolean(false);
+//        scene.addChild(wightFlg);
 
         var answers = [];
         for(var i = 0; i < 3; i++) {
@@ -150,6 +164,7 @@ window.onload = function() {
         }
 
         scene.addEventListener(Event.ENTER_FRAME, function(){
+        	
             scroll += SCROLL_SPEED;
             result['distance'] += SCROLL_SPEED;
             scoreLabel.text = scroll.toString()+'㍍走破'; // スコア表示を更新
@@ -177,6 +192,23 @@ window.onload = function() {
                 }
               }
             }
+
+            //お邪魔キャラ出現
+            if( scroll % 400 === 0){
+            enemy.x = 320;
+            }
+            if (enemy.x > -enemy.width) {
+              enemy.x -= SCROLL_SPEED;
+              if (enemy.intersect(charactorHit)) { // お邪魔キャラと自機がぶつかったとき
+                  if(!wightFlg){
+                    result['hitCount'] += 1;
+                    wightFlg = true;
+                  }
+              }else{
+                wightFlg = false;
+              }
+            }
+
 
             charactor.updateFrame();
 

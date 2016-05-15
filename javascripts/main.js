@@ -140,7 +140,7 @@ window.onload = function() {
             }
             if (scroll == 840) {
               for(var i = 0; i < 3; i++) {
-                answers[i].x = question.x + BETWEEN_Q_A;
+                answers[i].x = 850;
               }
             }
 

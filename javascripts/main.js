@@ -3,6 +3,9 @@ enchant();
 window.onload = function() {
   var result = {
     'correctAnswer': 0,
+
+    'incorrectAnswer': 0,
+
     'hitCount':0,
 
     'distance': 0,
@@ -72,7 +75,9 @@ window.onload = function() {
     };
 
     var createScoreLabel = function(scene) {
-      var label = createLabel('正解数（せいかいすう）: ' + result['correctAnswer'], 200);
+      var label = createLabel('正解数（せいかいすう）: ' + result['correctAnswer'], 180);
+      scene.addChild(label);
+      var label = createLabel('不正解数（ふせいかいすう）: ' + result['incorrectAnswer'], 200);
       scene.addChild(label);
       label = createLabel('走った距離（はしったきょり）: ' + result['distance'] + '㍍', 220);
       scene.addChild(label);
@@ -201,6 +206,7 @@ window.onload = function() {
                 }
                 else {
                   charactor.frame = 3;
+                  result['incorrectAnswer'] += 1
                   game_.pushScene(createGameoverScene(scroll));
                 }
               }

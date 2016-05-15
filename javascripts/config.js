@@ -14,7 +14,9 @@ var Config = {
     './images/bg2.png'
   ],
 
-  'enemyImagePath': './images/enemy.png',
+  'enemyImagePaths': [
+    './images/enemy.png'
+  ],
 
   'backgroundNextLevelPoint': 2000
 };

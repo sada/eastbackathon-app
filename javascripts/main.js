@@ -16,9 +16,11 @@ window.onload = function() {
     Config['startBackgroundImagePath'],
     Config['correctAnswerImagePath'],
     Config['gameOverImagePath'],
-    Config['charactorImagePath'],
-    Config['enemyImagePath']
+    Config['charactorImagePath']
   ];
+  Config['enemyImagePaths'].forEach(function(enemyImagePath) {
+    imagePaths.push(enemyImagePath);
+  });
   Config['backgroundImagePaths'].forEach(function(backgroundImagePath) {
     imagePaths.push(backgroundImagePath);
   });
@@ -87,6 +89,14 @@ window.onload = function() {
       }
     };
 
+    var createEnemy = function(image) {
+      var enemy = new Sprite(image.width, image.height);
+      enemy.image = image;
+      enemy.x = -enemy.width;
+      enemy.y = [50, 150, 250][Math.floor(Math.random() * 10) % 3] - (image.height / 2);
+      return enemy;
+    };
+
     var createGameScene = function() {
         var scroll = 0;
 
@@ -125,12 +135,10 @@ window.onload = function() {
         scoreLabel.x = scene.wight / 2;
         scene.addChild(scoreLabel);                // シーンに追加
 
-        //お邪魔キャラの設定
-        var enemy = new Sprite(32, 32);          // スプライトをつくる
-        enemy.image = game_.assets[Config['enemyImagePath']]; // 画像を設定
-        enemy.x = -enemy.width;
-        enemy.y = 50;
-        scene.addChild(enemy);                    // シーンに追加
+        // お邪魔キャラの設定
+        var enemyIndex = Math.floor(Math.random() * 10 % Config['enemyImagePaths'].length);
+        var enemy = createEnemy(game_.assets[Config['enemyImagePaths'][enemyIndex]]);
+        scene.addChild(enemy);
 
         //お邪魔キャラ当たり判定ウェイト用フラグ
         var wightFlg = new Boolean(false);

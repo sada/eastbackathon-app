@@ -7,7 +7,10 @@ var Config = {
 
   'charactorImagePath': './javascripts/enchant_js-0.8.3/images/chara1.png',
 
-  'backgroundImagePath1': './images/bg1.png',
+  'backgroundImagePaths': [
+    './images/bg1.png',
+    './images/bg2.png'
+  ],
 
-  'backgroundImagePath2': './images/bg2.png'
+  'backgroundNextLevelPoint': 2000
 };

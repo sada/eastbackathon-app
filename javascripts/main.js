@@ -4,7 +4,9 @@ window.onload = function() {
   var result = {
     'correctAnswer': 0,
 
-    'distance': 0
+    'distance': 0,
+
+    'backgroundLevel': 0
   };
   var game_ = new Game(320, 480);
   game_.fps = 24;
@@ -12,10 +14,11 @@ window.onload = function() {
     Config['startImagePath'],
     Config['correctAnswerImagePath'],
     Config['gameOverImagePath'],
-    Config['charactorImagePath'],
-    Config['backgroundImagePath1'],
-    Config['backgroundImagePath2']
+    Config['charactorImagePath']
   ];
+  Config['backgroundImagePaths'].forEach(function(backgroundImagePath) {
+    imagePaths.push(backgroundImagePath);
+  });
   questionData.forEach(function(data) {
     imagePaths.push('./images/' + data['question']);
   });
@@ -73,6 +76,17 @@ window.onload = function() {
       scene.addChild(label);
     };
 
+    var getBackgroundImagePath = function() {
+      return Config['backgroundImagePaths'][result['backgroundLevel'] % Config['backgroundImagePaths'].length];
+    };
+
+    var updateBackgroundLevel = function() {
+      if (result['distance'] > result['backgroundLevel'] * Config['backgroundNextLevelPoint']) {
+        result['backgroundLevel'] += 1;
+        result['backgroundLevel'] = result['backgroundLevel'] % Config['backgroundImagePaths'].length;
+      }
+    };
+
     var createGameScene = function() {
         var scroll = 0;
 
@@ -83,7 +97,7 @@ window.onload = function() {
         scene.backgroundColor = '#8cc820';
 
         var bg1 = new Sprite(1280, 480);
-        bg1.image = game_.assets[Config['backgroundImagePath1']];
+        bg1.image = game_.assets[getBackgroundImagePath()];
         bg1.x = 0;
         bg1.y = 0;
         bg1.height = 600;
@@ -203,6 +217,7 @@ window.onload = function() {
       correctAnswerImage.y = 50;
       scene.addChild(correctAnswerImage);
 
+      updateBackgroundLevel();
       createScoreLabel(scene);
 
       var retryLabel = createLabel('もう一度（いちど）挑戦（ちょうせん）する', 284);
@@ -231,6 +246,7 @@ window.onload = function() {
       gameoverImage.y = 50;
       scene.addChild(gameoverImage);
 
+      updateBackgroundLevel();
       createScoreLabel(scene);
 
       var retryLabel = createLabel('もう一度（いちど）挑戦（ちょうせん）する', 284);

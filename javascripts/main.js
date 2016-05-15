@@ -53,7 +53,7 @@ window.onload = function() {
       startTitleImage.y = 50;
       scene.addChild(startTitleImage);
 
-      var description1 = createLabel('説明：キャラクターが走るところをタッチで変(か)えて写真（しゃしん）と同（おな）じ文字（もじ）のところへキャラクターを走らせよう', 180);
+      var description1 = createLabel('説明（せつめい）：キャラクターが走るところをタッチで変(か)えて写真（しゃしん）と同（おな）じ文字（もじ）のところへキャラクターを走らせよう', 180);
       scene.addChild(description1);
       var description2 = createLabel('タッチするとゲームがはじまるよ', 250);
       scene.addChild(description2);

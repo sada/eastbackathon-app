@@ -3,7 +3,7 @@ enchant();
 window.onload = function() {
   var result = {
     'correctAnswer': 0,
-
+    'hitCount':0,
     'distance': 0
   };
   var game_ = new Game(320, 480);
@@ -14,7 +14,8 @@ window.onload = function() {
     Config['gameOverImagePath'],
     Config['charactorImagePath'],
     Config['backgroundImagePath1'],
-    Config['backgroundImagePath2']
+    Config['backgroundImagePath2'],
+    Config['enemyImagePath']
   ];
   questionData.forEach(function(data) {
     imagePaths.push('./images/' + data['question']);
@@ -112,6 +113,13 @@ window.onload = function() {
         scoreLabel.x = scene.wight / 2;
         scene.addChild(scoreLabel);                // シーンに追加
 
+        //お邪魔キャラの設定
+        var enemy = new Sprite(32, 32);          // スプライトをつくる
+        enemy.image = game_.assets[Config['enemyImagePath']]; // 画像を設定
+        enemy.x = -enemy.width;
+        enemy.y = 50;
+        scene.addChild(enemy);                    // シーンに追加
+
 
         var answers = [];
         for(var i = 0; i < 3; i++) {
@@ -163,6 +171,18 @@ window.onload = function() {
                 }
               }
             }
+
+            //お邪魔キャラ出現
+            if( scroll % 400 === 0){
+            enemy.x = 320;
+            }
+            if (enemy.x > -enemy.width) {
+              enemy.x -= SCROLL_SPEED;
+              if (enemy.intersect(charactorHit)) { // ハードルとくまがぶつかったとき
+               result['hitCount'] +=1;
+              }
+            }
+
 
             charactor.updateFrame();
 

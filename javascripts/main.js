@@ -205,13 +205,7 @@ window.onload = function() {
 
       createScoreLabel(scene);
 
-      var retryLabel = new Label('リトライ');
-      retryLabel.width = 320;
-      retryLabel.textAlign = 'center';
-      retryLabel.color = '#ffffff';
-      retryLabel.x = 0;
-      retryLabel.y = 284;
-      retryLabel.font = '24px sans-serif';
+      var retryLabel = createLabel('もう一度（いちど）挑戦（ちょうせん）する', 284);
       scene.addChild(retryLabel);
 
       var buttonRetry = new Sprite(320, 32);
@@ -239,13 +233,7 @@ window.onload = function() {
 
       createScoreLabel(scene);
 
-      var retryLabel = new Label('リトライ');
-      retryLabel.width = 320;
-      retryLabel.textAlign = 'center';
-      retryLabel.color = '#ffffff';
-      retryLabel.x = 0;
-      retryLabel.y = 284;
-      retryLabel.font = '24px sans-serif';
+      var retryLabel = createLabel('もう一度（いちど）挑戦（ちょうせん）する', 284);
       scene.addChild(retryLabel);
 
       var buttonRetry = new Sprite(320, 32);

@@ -221,7 +221,7 @@ window.onload = function() {
 
       buttonRetry.addEventListener(Event.TOUCH_END, function(){
         game_.popScene();
-        game_.replaceScene(createStartScene());
+        game_.replaceScene(createGameScene());
       });
 
       return scene;
@@ -255,7 +255,7 @@ window.onload = function() {
 
       buttonRetry.addEventListener(Event.TOUCH_END, function(){
         game_.popScene();
-        game_.replaceScene(createStartScene());
+        game_.replaceScene(createGameScene());
       });
 
       return scene;

@@ -104,7 +104,6 @@ window.onload = function() {
         bg1.image = game_.assets[getBackgroundImagePath()];
         bg1.x = 0;
         bg1.y = 0;
-        bg1.height = 600;
         scene.addChild(bg1);
 
         var questionDataIndex = Math.floor(Math.random() * 10 % questionData.length);

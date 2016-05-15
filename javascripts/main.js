@@ -73,6 +73,7 @@ window.onload = function() {
         var scroll = 0;
 
         var SCROLL_SPEED = 5;
+        var BETWEEN_Q_A = 100;
 
         var scene = new Scene();
         scene.backgroundColor = '#8cc820';
@@ -106,6 +107,12 @@ window.onload = function() {
         charactorHit.x = charactor.x + charactor.width / 2;
         charactorHit.y = charactor.y + charactor.height / 2;
         scene.addChild(charactorHit);
+        
+        var scoreLabel = new Label("");            // ラベルをつくる
+        scoreLabel.color = '#fff';                 // 白色に設定
+        scoreLabel.x = scene.wight / 2;
+        scene.addChild(scoreLabel);                // シーンに追加
+
 
         var answers = [];
         for(var i = 0; i < 3; i++) {
@@ -131,16 +138,17 @@ window.onload = function() {
 
         scene.addEventListener(Event.ENTER_FRAME, function(){
             scroll += SCROLL_SPEED;
+            scoreLabel.text = scroll.toString()+'㍍走破'; // スコア表示を更新
 
             if (scroll % 640 === 0) {
-            question.x = 320;
+            question.x = 350;
               for(var i = 0; i < 3; i++) {
-                answers[i].x = 560;
+                answers[i].x = question.x + BETWEEN_Q_A;
               }
             }
 
             
-            if (question.x > -(question.width+240)) {
+            if (question.x > -(question.width+BETWEEN_Q_A)) {
               question.x -= SCROLL_SPEED;
               for(var i = 0; i < 3; i++) {
                 answers[i].x -= SCROLL_SPEED;

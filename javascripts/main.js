@@ -46,21 +46,10 @@ window.onload = function() {
       startTitleImage.y = 50;
       scene.addChild(startTitleImage);
 
-      var description = createLabel('下（した）のステージの名前（なまえ）をタッチするとゲームが始（はじ）まるよ', 180);
+      var description = createLabel('タッチするとゲームがはじまるよ', 180);
       scene.addChild(description);
-      
-      // ステージ選択ラベル設定
-      var selectStage1 = new Label('ステージA'); // ラベルを作る
-      selectStage1.width = 320;
-      selectStage1.textAlign = 'center';                 // 文字を中央寄せ
-      selectStage1.color = '#ffffff';                    // 文字を白色に
-      selectStage1.x = 0;                                // 横位置調整
-      selectStage1.y = 222;                              // 縦位置調整
-      selectStage1.font = '14px sans-serif';             // 28pxのゴシック体にする
-      scene.addChild(selectStage1);                      // シーンに追加
 
-
-      selectStage1.addEventListener(Event.TOUCH_START, function(e) {
+      startBackgroundImage.addEventListener(Event.TOUCH_START, function(e) {
           game_.replaceScene(createGameScene());
       });
 

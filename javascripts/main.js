@@ -15,7 +15,7 @@ window.onload = function() {
     Config['startImagePath'],
     Config['correctAnswerImagePath'],
     Config['gameOverImagePath'],
-    Config['charactorImagePath']
+    Config['charactorImagePath'],
     Config['enemyImagePath']
   ];
   Config['backgroundImagePaths'].forEach(function(backgroundImagePath) {

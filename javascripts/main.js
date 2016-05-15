@@ -127,10 +127,12 @@ window.onload = function() {
         scene.addEventListener(Event.ENTER_FRAME, function(){
             scroll += SCROLL_SPEED;
 
-            if (scroll % 640 === 0) {
+            if (scroll == 320) {
               question.x = 320;
+            }
+            if (scroll == 840) {
               for(var i = 0; i < 3; i++) {
-                answers[i].x = 640;
+                answers[i].x = 840;
               }
             }
 

@@ -12,7 +12,8 @@ window.onload = function() {
   var game_ = new Game(320, 480);
   game_.fps = 24;
   var imagePaths = [
-    Config['startImagePath'],
+    Config['startTitleImagePath'],
+    Config['startBackgroundImagePath'],
     Config['correctAnswerImagePath'],
     Config['gameOverImagePath'],
     Config['charactorImagePath'],
@@ -33,11 +34,17 @@ window.onload = function() {
       var scene = new Scene();
       scene.backgroundColor = '#fcc800';
 
-      var startImage = new Sprite(236, 48);
-      startImage.image = game_.assets[Config['startImagePath']];
-      startImage.x = 42;
-      startImage.y = 50;
-      scene.addChild(startImage);
+      var startBackgroundImage = new Sprite(320, 480);
+      startBackgroundImage.image = game_.assets[Config['startBackgroundImagePath']];
+      startBackgroundImage.x = 0;
+      startBackgroundImage.y = 0;
+      scene.addChild(startBackgroundImage);
+
+      var startTitleImage = new Sprite(236, 48);
+      startTitleImage.image = game_.assets[Config['startTitleImagePath']];
+      startTitleImage.x = 42;
+      startTitleImage.y = 50;
+      scene.addChild(startTitleImage);
 
       var description = createLabel('下（した）のステージの名前（なまえ）をタッチするとゲームが始（はじ）まるよ', 180);
       scene.addChild(description);

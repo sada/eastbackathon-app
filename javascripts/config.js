@@ -1,5 +1,7 @@
 var Config = {
-  'startImagePath': './javascripts/enchant_js-0.8.3/images/start.png',
+  'startTitleImagePath': './javascripts/enchant_js-0.8.3/images/start.png',
+
+  'startBackgroundImagePath': './images/bg_start.png',
 
   'correctAnswerImagePath': './javascripts/enchant_js-0.8.3/images/clear.png',
 

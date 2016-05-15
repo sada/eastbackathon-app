@@ -72,6 +72,8 @@ window.onload = function() {
       scene.addChild(label);
       label = createLabel('走った距離（はしったきょり）: ' + result['distance'] + '㍍', 220);
       scene.addChild(label);
+      label = createLabel('敵（てき）にぶつかった回数（かいすう）: ' + result['hitCount'] + '回', 240);
+      scene.addChild(label);
     };
 
     var createGameScene = function() {
@@ -120,6 +122,9 @@ window.onload = function() {
         enemy.y = 50;
         scene.addChild(enemy);                    // シーンに追加
 
+        //お邪魔キャラ当たり判定ウェイト用フラグ
+        var wightFlg = new Boolean(false);
+//        scene.addChild(wightFlg);
 
         var answers = [];
         for(var i = 0; i < 3; i++) {
@@ -144,6 +149,7 @@ window.onload = function() {
         }
 
         scene.addEventListener(Event.ENTER_FRAME, function(){
+        	
             scroll += SCROLL_SPEED;
             result['distance'] += SCROLL_SPEED;
             scoreLabel.text = scroll.toString()+'㍍走破'; // スコア表示を更新
@@ -178,8 +184,13 @@ window.onload = function() {
             }
             if (enemy.x > -enemy.width) {
               enemy.x -= SCROLL_SPEED;
-              if (enemy.intersect(charactorHit)) { // ハードルとくまがぶつかったとき
-               result['hitCount'] +=1;
+              if (enemy.intersect(charactorHit)) { // お邪魔キャラと自機がぶつかったとき
+                  if(!wightFlg){
+                    result['hitCount'] += 1;
+                    wightFlg = true;
+                  }
+              }else{
+                wightFlg = false;
               }
             }
 

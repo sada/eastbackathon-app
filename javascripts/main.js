@@ -149,8 +149,8 @@ window.onload = function() {
         // お邪魔キャラの設定
         var enemies = [];
         for(var i = 0; i < (result['backgroundLevel'] + 1 * 5); i++) {
-          var enemyIndex = Math.floor(Math.random() * 10 % Config['enemyImagePaths'].length);
-          var enemy = createEnemy(game_.assets[Config['enemyImagePaths'][enemyIndex]]);
+          var enemyImagePaths = Config['enemyImagePaths'][result['backgroundLevel'] % Config['enemyImagePaths'].length];
+          var enemy = createEnemy(game_.assets[enemyImagePaths[i % enemyImagePaths.length]]);
           scene.addChild(enemy);
           enemies.push(enemy);
         }

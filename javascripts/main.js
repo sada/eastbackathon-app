@@ -20,6 +20,9 @@ window.onload = function() {
     Config['correctAnswerImagePath'],
     Config['gameOverImagePath']
   ];
+  Config['musicPaths'].forEach(function(musicPath) {
+    imagePaths.push(musicPath);
+  });
   Config['charactorImagePaths'].forEach(function(charactorImagePath) {
     imagePaths.push(charactorImagePath);
   });
@@ -110,7 +113,22 @@ window.onload = function() {
       return Config['charactorImagePaths'][result['backgroundLevel'] % (Config['charactorImagePaths'].length)];
     };
 
+    var getMusicPath = function() {
+      return Config['musicPaths'][result['backgroundLevel'] % (Config['musicPaths'].length)];
+    };
+
+    if (getMusicPath()) {
+      var bgm = game_.assets[getMusicPath()].clone();
+    }
+    else {
+      var bgm = null;
+    }
+
     var createGameScene = function() {
+        if (bgm) { 
+          bgm = game_.assets[getMusicPath()].clone();
+          bgm.play();
+        }
         var scroll = 0;
 
         var SCROLL_SPEED = 5;
@@ -280,6 +298,10 @@ window.onload = function() {
       var retryLabel = createLabel('もう一度（いちど）挑戦（ちょうせん）する', 284);
       scene.addChild(retryLabel);
 
+      if (bgm) {
+        bgm.stop();
+      }
+
       var buttonRetry = new Sprite(320, 32);
       buttonRetry.x = 0;
       buttonRetry.y = 284;
@@ -308,6 +330,10 @@ window.onload = function() {
 
       var retryLabel = createLabel('もう一度（いちど）挑戦（ちょうせん）する', 284);
       scene.addChild(retryLabel);
+
+      if (bgm) {
+        bgm.stop();
+      }
 
       var buttonRetry = new Sprite(320, 32);
       buttonRetry.x = 0;

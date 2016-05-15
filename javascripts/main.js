@@ -229,7 +229,7 @@ window.onload = function() {
       var gameoverImage = new Sprite(189, 97);
       gameoverImage.image = game_.assets['./javascripts/enchant_js-0.8.3/images/gameover.png'];
       gameoverImage.x = 66;
-      gameoverImage.y = 170;
+      gameoverImage.y = 50;
       scene.addChild(gameoverImage);
 
       createScoreLabel(scene);

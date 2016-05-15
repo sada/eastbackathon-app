@@ -77,17 +77,12 @@ window.onload = function() {
         var scene = new Scene();
         scene.backgroundColor = '#8cc820';
 
-        var bg1 = new Sprite(320, 320);
+        var bg1 = new Sprite(1280, 480);
         bg1.image = game_.assets[Config['backgroundImagePath1']];
         bg1.x = 0;
         bg1.y = 0;
+        bg1.height = 600;
         scene.addChild(bg1);
-
-        var bg2 = new Sprite(320, 320);
-        bg2.image = game_.assets[Config['backgroundImagePath2']];
-        bg2.x = 320;
-        bg2.y = 0;
-        scene.addChild(bg2);
 
         var questionDataIndex = Math.floor(Math.random() * 10 % questionData.length);
         var selectedQuestionData = questionData[questionDataIndex];
@@ -133,30 +128,25 @@ window.onload = function() {
             scroll += SCROLL_SPEED;
 
             if (scroll % 640 === 0) {
-            question.x = 320;
+              question.x = 320;
               for(var i = 0; i < 3; i++) {
-                answers[i].x = 560;
+                answers[i].x = 640;
               }
             }
 
-            
-            if (question.x > -(question.width+240)) {
-              question.x -= SCROLL_SPEED;
-              for(var i = 0; i < 3; i++) {
-                answers[i].x -= SCROLL_SPEED;
-                if (answers[i].intersect(charactorHit)) {
-                  if (answers[i].correct) {
-                    game_.pushScene(createCorrectAnswerScene(scroll));
-                  }
-                  else {
-                    charactor.frame = 3;
-                    game_.pushScene(createGameoverScene(scroll));
-                  }
+            question.x -= SCROLL_SPEED;
+            for(var i = 0; i < 3; i++) {
+              answers[i].x -= SCROLL_SPEED;
+              if (answers[i].intersect(charactorHit)) {
+                if (answers[i].correct) {
+                  game_.pushScene(createCorrectAnswerScene(scroll));
+                }
+                else {
+                  charactor.frame = 3;
+                  game_.pushScene(createGameoverScene(scroll));
                 }
               }
             }
-
-            
 
             charactor.updateFrame();
 
@@ -164,13 +154,9 @@ window.onload = function() {
             charactorHit.y = charactor.y + charactor.height/2;
 
             bg1.x -= SCROLL_SPEED;
-            bg2.x -= SCROLL_SPEED;
 
-            if (bg1.x <= -320) {
-                bg1.x = 320;
-            }
-            if (bg2.x <= -320) {
-                bg2.x = 320;
+            if (bg1.x <= -640) {
+                bg1.x = 0;
             }
         });
 

@@ -225,12 +225,12 @@ window.onload = function() {
               if (enemy.x > -enemy.width) {
                 enemy.x -= SCROLL_SPEED;
                 if (enemy.intersect(charactorHit)) { // お邪魔キャラと自機がぶつかったとき
-                    if(!wightFlg){
+                    if(!enemy.wightFlg){
                       result['hitCount'] += 1;
-                      wightFlg = true;
+                      enemy.wightFlg = true;
                     }
                 }else{
-                  wightFlg = false;
+                  enemy.wightFlg = false;
                 }
               }
             });
